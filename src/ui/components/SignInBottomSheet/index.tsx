@@ -1,7 +1,12 @@
-import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
+import { BottomSheetModal, BottomSheetModalProvider, BottomSheetTextInput, BottomSheetView } from '@gorhom/bottom-sheet';
 import React from 'react';
+import { View } from 'react-native';
 import { AppText } from '../AppText';
-import { ISignInBottomSheet } from './iSignInBottomSheet';
+import { Button } from '../Button';
+import { FormGroup } from '../FormGroup';
+import { Input } from '../Input';
+import { ISignInBottomSheet } from './ISignInBottomSheet';
+import { styles } from './styles';
 import { useSignInBottomSheetController } from './useSignInBottomSheetController';
 
 interface ISignInBottomSheetProps {
@@ -9,13 +14,52 @@ interface ISignInBottomSheetProps {
 }
 
 export function SignInBottomSheet({ ref }: ISignInBottomSheetProps) {
-  const { bottom, bottomSheetModalRef } = useSignInBottomSheetController(ref);
+  const { bottom, bottomSheetModalRef, passwordInputRef, handleSubmit } = useSignInBottomSheetController(ref);
 
   return (
     <BottomSheetModalProvider>
       <BottomSheetModal ref={bottomSheetModalRef}>
-        <BottomSheetView style={{ paddingBottom: bottom }}>
-          <AppText>Acesse a sua conta</AppText>
+        <BottomSheetView style={[
+          styles.container,
+          { paddingBottom: bottom }
+        ]}>
+          <AppText
+            size="3xl"
+            weight="semiBold"
+            style={styles.heading}
+          >
+            Acesse a sua conta
+          </AppText>
+
+          <View style={styles.form}>
+            <FormGroup label="E-mail">
+              <Input
+                InputComponent={BottomSheetTextInput}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoCorrect={false}
+                autoComplete="email"
+                returnKeyType="next"
+                onSubmitEditing={() => passwordInputRef.current?.focus()}
+              />
+            </FormGroup>
+            <FormGroup label="Senha">
+              <Input
+                ref={passwordInputRef}
+                InputComponent={BottomSheetTextInput}
+                secureTextEntry
+                autoCapitalize="none"
+                autoCorrect={false}
+                autoComplete="current-password"
+                returnKeyType="done"
+                onSubmitEditing={handleSubmit}
+              />
+            </FormGroup>
+
+            <Button onPress={handleSubmit}>
+              Entrar
+            </Button>
+          </View>
         </BottomSheetView>
       </BottomSheetModal>
     </BottomSheetModalProvider>
