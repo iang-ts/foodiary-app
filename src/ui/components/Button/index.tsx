@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform, Pressable, View } from "react-native";
+import { Pressable, View } from "react-native";
 import { AppText } from "../AppText";
 import { buttonStyles, ButtonVariants, styles } from "./styles";
 
@@ -31,7 +31,7 @@ export function Button({
             variant: variant,
             disabled: disabled ? 'true' : 'false',
           }),
-          pressed && Platform.OS === 'ios' && { opacity: 0.7 },
+          pressed && { opacity: 0.7 },
           typeof style === 'function' ? style({ pressed }) : style,
         ]}
         disabled={disabled}
