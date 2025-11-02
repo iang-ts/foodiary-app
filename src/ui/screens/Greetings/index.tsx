@@ -1,9 +1,11 @@
+import { AuthStackNavigationProps } from '@app/navigation/AuthStack';
+import { useNavigation } from '@react-navigation/native';
 import grettingsBg from '@ui/assets/greettings-bg/image.jpg';
 import { AppText } from '@ui/components/AppText';
 import { Button } from '@ui/components/Button';
 import { Logo } from '@ui/components/Logo';
 import { SignInBottomSheet } from '@ui/components/SignInBottomSheet';
-import { ISignInBottomSheet } from '@ui/components/SignInBottomSheet/iSignInBottomSheet';
+import { ISignInBottomSheet } from '@ui/components/SignInBottomSheet/ISignInBottomSheet';
 import { theme } from '@ui/styles/theme';
 import { useRef } from 'react';
 import { ImageBackground, TouchableOpacity, View } from "react-native";
@@ -12,6 +14,7 @@ import { styles } from './styles';
 
 export function Greettings() {
   const signInBottomSheetRef = useRef<ISignInBottomSheet>(null);
+  const navigation = useNavigation<AuthStackNavigationProps>();
 
   return (
     <>
@@ -33,7 +36,7 @@ export function Greettings() {
               Controle sua dieta de forma simples
             </AppText>
             <View style={styles.ctaContent}>
-              <Button>
+              <Button onPress={() => navigation.navigate('Onboarding')}>
                 Criar Conta
               </Button>
 
