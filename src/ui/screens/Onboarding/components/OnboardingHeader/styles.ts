@@ -19,7 +19,10 @@ export const styles = StyleSheet.create({
     backgroundColor: theme.colors.lime[700],
     height: '100%',
     borderRadius: 4,
-    width: '50%',
+    width: 0,
   },
-  rightActionPlaceholder: {},
+  rightActionPlaceholder: {
+    width: 40,
+    height: 40,
+  },
 });
