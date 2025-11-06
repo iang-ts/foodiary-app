@@ -77,8 +77,8 @@ export function CreateAccountStep() {
         </View>
       </StepContent>
 
-      <StepFooter>
-        <Button onPress={handleSubmit}>
+      <StepFooter align="start">
+        <Button onPress={handleSubmit} >
           Criar conta
         </Button>
       </StepFooter>
