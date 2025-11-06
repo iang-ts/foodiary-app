@@ -5,6 +5,9 @@ export const styles = StyleSheet.create({
   container: {
     gap: 16,
   },
+  containerHorizontal: {
+    flexDirection: 'row',
+  },
   item: {
     borderWidth: 1,
     borderStyle: 'solid',
@@ -20,6 +23,11 @@ export const styles = StyleSheet.create({
     borderColor: theme.colors.lime[700],
     backgroundColor: theme.colors.lime['700/10'],
   },
+  horizontalItem: {
+    flexDirection: 'column',
+    paddingVertical: 32,
+    flex: 1,
+  },
   icon: {
     backgroundColor: theme.colors.gray[200],
     borderRadius: 12,
@@ -30,6 +38,9 @@ export const styles = StyleSheet.create({
   },
    iconSelected: {
     backgroundColor: theme.colors['white/40'],
+  },
+  textCenter: {
+    textAlign: 'center',
   },
   itemInfo: {
     gap: 2,

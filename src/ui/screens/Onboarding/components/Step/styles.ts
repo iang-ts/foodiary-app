@@ -23,8 +23,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingHorizontal: 24,
   },
+  contentCenter: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   footer: {
     paddingHorizontal: 24,
-    alignItems: 'flex-end',
   },
 });

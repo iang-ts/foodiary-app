@@ -7,6 +7,7 @@ import { styles } from "./styles";
 interface IRadioGroupContextValue {
   value: string | null;
   setValue: (value: string | null) => void;
+  isHorizontal: boolean;
 }
 
 const RadioGroupContext = createContext({} as IRadioGroupContextValue)
@@ -14,16 +15,23 @@ const RadioGroupContext = createContext({} as IRadioGroupContextValue)
 interface IRadioGrouProps {
   children: React.ReactNode,
   initalValue?: string | null;
+  orientation?: 'vertical' | 'horizontal';
 }
 
-export function RadioGroup({ children, initalValue }: IRadioGrouProps) {
+export function RadioGroup({
+  children,
+  initalValue,
+  orientation = 'vertical',
+}: IRadioGrouProps) {
   const [value, setValue] = useState<string | null>(initalValue ?? null);
+
+  const isHorizontal = orientation === 'horizontal';
 
   return (
     <RadioGroupContext.Provider
-      value={{ value, setValue }}
+      value={{ value, setValue, isHorizontal }}
     >
-      <View style={styles.container}>
+      <View style={[styles.container, isHorizontal && styles.containerHorizontal]}>
         {children}
       </View>
     </RadioGroupContext.Provider>
@@ -38,12 +46,16 @@ interface IRadioGroupItemProps {
 const RadioGroupItemContext = createContext({ isSelected: false });
 
 export function RadioGroupItem({ children, value }: IRadioGroupItemProps) {
-  const { value: selectedValue, setValue } = use(RadioGroupContext);
+  const { value: selectedValue, setValue, isHorizontal } = use(RadioGroupContext);
   const isSelected = value === selectedValue;
 
   return (
     <RadioGroupItemContext.Provider value={{ isSelected }}>
-      <TouchableOpacity style={[styles.item, isSelected && styles.selectedItem]} onPress={() => setValue(value)}>
+      <TouchableOpacity style={[
+        styles.item,
+        isSelected && styles.selectedItem,
+        isHorizontal && styles.horizontalItem
+      ]} onPress={() => setValue(value)}>
         {children}
       </TouchableOpacity>
     </RadioGroupItemContext.Provider>
@@ -61,14 +73,18 @@ export function RadioGroupIcon({ children }: { children: string }) {
 }
 
 export function RadioGroupLabel({ children }: { children: string }) {
+  const { isHorizontal } = use(RadioGroupContext);
+
   return (
-    <AppText weight="semiBold" style={{ letterSpacing: -0.32 }}>{children}</AppText>
+    <AppText weight="semiBold" style={[{ letterSpacing: -0.32 }, isHorizontal && styles.textCenter]}>{children}</AppText>
   );
 }
 
 export function RadioGroupDescription({ children }: { children: string }) {
+  const { isHorizontal } = use(RadioGroupContext);
+
   return (
-    <AppText size="sm" color={theme.colors.gray[700]}>{children}</AppText>
+    <AppText size="sm" color={theme.colors.gray[700]} style={isHorizontal && styles.textCenter}>{children}</AppText>
   );
 }
 

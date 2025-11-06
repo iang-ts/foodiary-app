@@ -13,7 +13,7 @@ export enum Goal {
 }
 
 export function GoalStep() {
-  const { currentStepIndex, nextStep } = useOnboarding();
+  const { nextStep } = useOnboarding();
 
   return (
     <Step>
