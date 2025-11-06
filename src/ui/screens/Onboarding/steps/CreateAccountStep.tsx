@@ -13,7 +13,6 @@ export function CreateAccountStep() {
   const confirmPasswordInputRef = React.useRef<any>(null);
 
   function handleSubmit() {
-    // Aqui você pode adicionar a lógica de validação e criação de conta
     nextStep();
   }
 
