@@ -35,11 +35,9 @@ export function StepTitle({ children }: { children: string; }) {
 
 export function StepSubTitle({ children }: { children: string; }) {
   return (
-    <View style={styles.header}>
-      <AppText color={theme.colors.gray[700]} style={styles.subTitle}>
-        {children}
-      </AppText>
-    </View>
+    <AppText color={theme.colors.gray[700]} style={styles.subTitle}>
+      {children}
+    </AppText>
   );
 }
 
