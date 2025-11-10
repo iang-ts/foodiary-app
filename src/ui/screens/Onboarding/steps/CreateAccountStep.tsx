@@ -1,9 +1,12 @@
+import { useAuth } from "@app/contexts/AuthContext/useAuth";
+import { ErrorCode } from "@app/types/ErrorCode";
 import { Button } from "@ui/components/Button";
 import { FormGroup } from "@ui/components/FormGroup";
 import { Input } from "@ui/components/Input";
+import { isAxiosError } from "axios";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 import { Step, StepContent, StepFooter, StepHeader, StepSubTitle, StepTitle } from "../components/Step";
 import { useOnboarding } from "../context/useOnboarding";
 import { OnboardingSchema } from "../schema";
@@ -11,14 +14,40 @@ import { OnboardingSchema } from "../schema";
 export function CreateAccountStep() {
   const { nextStep } = useOnboarding();
   const form =  useFormContext<OnboardingSchema>();
+  const { signUp } = useAuth();
 
   const emailInputRef = React.useRef<any>(null);
   const passwordInputRef = React.useRef<any>(null);
   const confirmPasswordInputRef = React.useRef<any>(null);
 
-  const handleSubmit = form.handleSubmit(formdata => {
-    console.log(JSON.stringify(formdata, null, 2));
-  })
+  const handleSubmit = form.handleSubmit(async data => {
+    try {
+      const birthDate = data.birthDate.toISOString().split('T')[0];
+      await signUp({
+        account: {
+          email: data.account.email,
+          password: data.account.password,
+        },
+        profile: {
+          name: data.account.name,
+          activityLevel: data.activityLevel,
+          birthDate,
+          gender: data.gender,
+          goal: data.goal,
+          height: Number(data.height),
+          weight: Number(data.weight),
+        }
+      });
+
+    } catch (error) {
+      if (isAxiosError(error) && error.response?.data?.error.code === ErrorCode.EMAIL_ALREADY_IN_USE) {
+        console.log(JSON.stringify(error.response?.data, null, 2))
+        Alert.alert('Oops!', 'Este email já está sendo usado por outro usuário.');
+        return;
+      }
+      Alert.alert('Oops!', 'Ocorreu um erro ao criar a sua conta, tente novamente.');
+    }
+   });
 
   return (
     <Step>
@@ -43,6 +72,7 @@ export function CreateAccountStep() {
                   autoComplete="name"
                   returnKeyType="next"
                   onSubmitEditing={() => emailInputRef.current?.focus()}
+                  disabled={form.formState.isSubmitting}
                 />
               </FormGroup>
             )}
@@ -64,6 +94,7 @@ export function CreateAccountStep() {
                   autoComplete="email"
                   returnKeyType="next"
                   onSubmitEditing={() => passwordInputRef.current?.focus()}
+                  disabled={form.formState.isSubmitting}
                 />
               </FormGroup>
             )}
@@ -85,6 +116,7 @@ export function CreateAccountStep() {
                   autoComplete="new-password"
                   returnKeyType="next"
                   onSubmitEditing={() => confirmPasswordInputRef.current?.focus()}
+                  disabled={form.formState.isSubmitting}
                 />
               </FormGroup>
             )}
@@ -106,6 +138,7 @@ export function CreateAccountStep() {
                   autoComplete="new-password"
                   returnKeyType="done"
                   onSubmitEditing={handleSubmit}
+                  disabled={form.formState.isSubmitting}
                 />
               </FormGroup>
             )}
@@ -114,7 +147,7 @@ export function CreateAccountStep() {
       </StepContent>
 
       <StepFooter align="start">
-        <Button onPress={handleSubmit} >
+        <Button onPress={handleSubmit} isLoading={form.formState.isSubmitting} >
           Criar conta
         </Button>
       </StepFooter>
