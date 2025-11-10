@@ -12,7 +12,7 @@ export function Button({
   children,
   variant,
   size,
-  disable: disabledProp,
+  disabled: disabledProp,
   style,
   isLoading,
   ...props
