@@ -48,8 +48,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         Service.setAcessToken(newTokens.accessToken);
         await AuthTokensManager.save(newTokens);
-      } catch {
+      } catch (error) {
         signOut();
+        throw error;
       }
     });
 
