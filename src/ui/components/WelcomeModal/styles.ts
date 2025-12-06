@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    gap: 36,
   },
   header: {
     alignItems: 'center',
@@ -38,6 +39,9 @@ export const styles = StyleSheet.create({
   },
   titleHighlight: {
     color: theme.colors.lime[500],
+  },
+  body: {
+    alignItems: 'center',
   },
   footer: {
     paddingHorizontal: 24,
