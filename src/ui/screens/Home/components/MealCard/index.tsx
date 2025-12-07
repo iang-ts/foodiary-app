@@ -2,7 +2,7 @@ import { Meal } from "@app/types/Meal";
 import { AppText } from "@ui/components/AppText";
 import { theme } from "@ui/styles/theme";
 import { useMemo } from "react";
-import { Pressable, View } from "react-native";
+import { Platform, Pressable, View } from "react-native";
 import { useHomeContext } from "../../context/usehomeContext";
 import { styles } from "./styles";
 
@@ -39,11 +39,12 @@ export function MealCard({ meal }: IMealCardProps) {
         <Pressable
           disabled={isLoading}
           android_ripple={{
-            color: 'rgba(0, 0, 0, 0.1)'
+            color: 'rgba(0, 0, 0, 0.1)',
+            foreground: true,
           }}
           style={({ pressed }) => [
             styles.card,
-            pressed && { opacity: 0.5 },
+            pressed && Platform.OS === 'ios' && { opacity: 0.5 },
           ]}
         >
           <View style={styles.header}>

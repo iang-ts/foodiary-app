@@ -1,7 +1,7 @@
 import { theme } from "@ui/styles/theme";
 import { LucideIcon } from "lucide-react-native";
 import React from "react";
-import { ActivityIndicator, Pressable, View } from "react-native";
+import { ActivityIndicator, Platform, Pressable, View } from "react-native";
 import { AppText } from "../AppText";
 import { buttonStyles, ButtonVariants, styles } from "./styles";
 
@@ -32,7 +32,8 @@ export function Button({
     <View style={styles.wrapper}>
       <Pressable
         android_ripple={{
-          color: 'rgba(0, 0, 0, 0.1)'
+          color: 'rgba(0, 0, 0, 0.1)',
+          foreground: true,
         }}
         style={({ pressed }) => [
           buttonStyles({
@@ -40,7 +41,7 @@ export function Button({
             variant: variant,
             disabled: disabled ? 'true' : 'false',
           }),
-          pressed && { opacity: 0.7 },
+          pressed  && Platform.OS === 'ios' && { opacity: 0.7 },
           typeof style === 'function' ? style({ pressed }) : style,
         ]}
         disabled={disabled || isLoading}

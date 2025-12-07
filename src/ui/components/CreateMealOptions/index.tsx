@@ -1,7 +1,7 @@
 import { theme } from "@ui/styles/theme";
 import { CameraIcon, LucideIcon, MicIcon } from "lucide-react-native";
 import React from "react";
-import { Pressable, View } from "react-native";
+import { Platform, Pressable, View } from "react-native";
 import { AppText } from "../AppText";
 import { styles } from "./styles";
 
@@ -38,11 +38,12 @@ export function OptionButton({ icon: Icon, label, disabled = false }: IOptionBut
       <Pressable
         disabled={disabled}
         android_ripple={{
-          color: 'rgba(0, 0, 0, 0.1)'
+          color: 'rgba(0, 0, 0, 0.1)',
+          foreground: true,
         }}
         style={({ pressed }) => [
           styles.button,
-         ( disabled || pressed) && { opacity: 0.5 },
+         ( disabled || pressed) && Platform.OS === 'ios' && { opacity: 0.5 },
         ]}
       >
         <View style={styles.icon}>
