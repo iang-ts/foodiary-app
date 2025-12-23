@@ -1,3 +1,5 @@
+import 'react-native-reanimated';
+
 import { AuthProvider } from '@app/contexts/AuthContext/AuthProvider';
 import { queryClient } from '@app/lib/queryClient';
 import { Navigation } from '@app/navigation';

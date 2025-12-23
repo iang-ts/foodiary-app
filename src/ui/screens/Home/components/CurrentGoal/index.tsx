@@ -10,19 +10,27 @@ export function CurrentGoal() {
   const { meals, isLoading } = useHomeContext();
 
   const summary = useMemo(() => (
-      meals.flatMap(meal => meal.foods).reduce(
-        (acc, food) => ({
-          calories: acc.calories + food.calories,
+    (meals.flatMap(meal => meal.foods)).reduce(
+      (acc, food) => {
+        const proteinCalories = food.proteins * 4;
+        const carbohydratesCalories = food.carbohydrates * 4;
+        const fatsCalories = food.fats * 9;
+        const totalCalories = Math.round(proteinCalories + carbohydratesCalories + fatsCalories);
+
+        return {
+          calories: acc.calories + totalCalories,
           carbohydrates: acc.carbohydrates + food.carbohydrates,
           proteins: acc.proteins + food.proteins,
           fats: acc.fats + food.fats,
-        }),
-        { calories: 0, proteins: 0, carbohydrates: 0, fats: 0 },
-      )
-    ), [meals]);
+        }
+
+      },
+      { calories: 0, proteins: 0, carbohydrates: 0, fats: 0 },
+    )
+  ), [meals]);
 
   return (
-    <View style={[styles.container, { opacity: isLoading ? 0.5 : 1}]}>
+    <View style={[styles.container, { opacity: isLoading ? 0.5 : 1 }]}>
       <GoalStats
         calories={{ goal: account!.goal.calories, current: summary.calories }}
         proteins={{ goal: account!.goal.proteins, current: summary.proteins }}

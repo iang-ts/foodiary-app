@@ -21,16 +21,24 @@ export function MealCard({ meal }: IMealCardProps) {
   ), [meal.foods]);
 
   const summary = useMemo(() => (
-    meal.foods.reduce(
-      (acc, food) => ({
-        calories: acc.calories + food.calories,
-        carbohydrates: acc.carbohydrates + food.carbohydrates,
-        proteins: acc.proteins + food.proteins,
-        fats: acc.fats + food.fats,
-      }),
+    (meal?.foods ?? []).reduce(
+      (acc, food) => {
+        const proteinCalories = food.proteins * 4;
+        const carbohydratesCalories = food.carbohydrates * 4;
+        const fatsCalories = food.fats * 9;
+        const totalCalories = Math.round(proteinCalories + carbohydratesCalories + fatsCalories);
+
+        return {
+          calories: acc.calories + totalCalories,
+          carbohydrates: acc.carbohydrates + food.carbohydrates,
+          proteins: acc.proteins + food.proteins,
+          fats: acc.fats + food.fats,
+        }
+
+      },
       { calories: 0, proteins: 0, carbohydrates: 0, fats: 0 },
     )
-  ), [meal.foods]);
+  ), [meal?.foods]);
 
   return (
     <View style={[styles.container, { opacity: isLoading ? 0.5 : 1 }]}>
@@ -62,7 +70,7 @@ export function MealCard({ meal }: IMealCardProps) {
             </View>
           </View>
 
-           <View style={styles.body}>
+          <View style={styles.body}>
             <View style={styles.mealStatsRow}>
               <View style={styles.mealStat}>
                 <AppText weight="medium" color={theme.colors.support.tomato}>{Math.round(summary.calories)}</AppText>
@@ -70,14 +78,14 @@ export function MealCard({ meal }: IMealCardProps) {
                 <AppText weight="medium" color={theme.colors.support.teal}>{Math.round(summary.proteins)}g</AppText>
                 <AppText color={theme.colors.gray[700]}>Proteínas</AppText>
               </View>
-               <View style={styles.mealStat}>
+              <View style={styles.mealStat}>
                 <AppText weight="medium" color={theme.colors.support.yellow}>{Math.round(summary.carbohydrates)}g</AppText>
                 <AppText color={theme.colors.gray[700]}>Carboídratos</AppText>
                 <AppText weight="medium" color={theme.colors.support.orange}>{Math.round(summary.fats)}g</AppText>
                 <AppText color={theme.colors.gray[700]}>Gorduras</AppText>
               </View>
             </View>
-            </View>
+          </View>
         </Pressable>
       </View>
     </View>
