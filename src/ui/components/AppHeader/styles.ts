@@ -3,21 +3,16 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    gap: 8,
-  },
-  inputWithSuffix: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    justifyContent: 'space-between',
+    height: 48,
+    paddingHorizontal: 8,
+    backgroundColor: theme.colors.white,
   },
-  inputWrapper: {
-    flex: 1,
-  },
-  suffix: {
-    width: 58,
-    height: 52,
-    backgroundColor: theme.colors.gray[100],
-    borderRadius: 10,
+  rightAction: {
+    width: 48,
+    height: 48,
     alignItems: 'center',
     justifyContent: 'center',
   },

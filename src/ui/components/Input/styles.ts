@@ -6,6 +6,26 @@ export const styles = StyleSheet.create({
   input: {
     borderColor: theme.colors.gray[400],
   },
+  inputWithSuffix: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  inputFlexible: {
+    flex: 1,
+    height: '100%',
+    color: theme.colors.black[700],
+    fontSize: 16,
+    fontFamily: theme.fontFamily.sans.regular,
+  },
+  suffix: {
+    width: 58,
+    height: 52,
+    backgroundColor: theme.colors.gray[100],
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
 export const inputStyles = createVariants({
