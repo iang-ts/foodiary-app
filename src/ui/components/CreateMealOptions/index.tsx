@@ -1,26 +1,53 @@
 import { theme } from "@ui/styles/theme";
 import { CameraIcon, LucideIcon, MicIcon } from "lucide-react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Platform, Pressable, View } from "react-native";
 import { AppText } from "../AppText";
+import { AudioModal } from "../AudioModal";
+import { PictureModal } from "../PictureModal";
 import { styles } from "./styles";
 
 interface ICreateMealOptionsProps {
-  disabled?: boolean
+  disabled?: boolean;
+  onCreate?: () => void;
 }
 
-export function CreateMealOptions({ disabled = false }: ICreateMealOptionsProps) {
+export function CreateMealOptions({ disabled = false, onCreate }: ICreateMealOptionsProps) {
+  const [currentVisibleModal, setCurrentVisibleModal] = useState<null | 'audio' | 'picture'>(null);
+
+  function handleOpenModal(modal: 'audio' | 'picture') {
+    setCurrentVisibleModal(modal);
+  }
+
+  function handleCloseModal() {
+    setCurrentVisibleModal(null);
+  }
+
   return (
     <View style={styles.container}>
+      <AudioModal
+        visible={currentVisibleModal === 'audio'}
+        onClose={handleCloseModal}
+        onCreate={onCreate}
+      />
+
+      <PictureModal
+        visible={currentVisibleModal === 'picture'}
+        onClose={handleCloseModal}
+        onCreate={onCreate}
+      />
+
       <OptionButton
         icon={MicIcon}
         label="Áudio"
         disabled={disabled}
+        onPress={() => handleOpenModal('audio')}
       />
       <OptionButton
         icon={CameraIcon}
         label="Foto"
         disabled={disabled}
+        onPress={() => handleOpenModal('picture')}
       />
     </View>
   )
@@ -29,10 +56,11 @@ export function CreateMealOptions({ disabled = false }: ICreateMealOptionsProps)
 interface IOptionButtonProps {
   icon: LucideIcon;
   label: string;
+  onPress: () => void;
   disabled?: boolean
 }
 
-export function OptionButton({ icon: Icon, label, disabled = false }: IOptionButtonProps) {
+export function OptionButton({ icon: Icon, label, disabled = false, onPress }: IOptionButtonProps) {
   return (
     <View style={styles.buttonWrapper}>
       <Pressable
@@ -45,6 +73,7 @@ export function OptionButton({ icon: Icon, label, disabled = false }: IOptionBut
           styles.button,
          ( disabled || pressed) && Platform.OS === 'ios' && { opacity: 0.5 },
         ]}
+        onPress={onPress}
       >
         <View style={styles.icon}>
           <Icon size={24} color={theme.colors.black[700]} />

@@ -3,6 +3,7 @@ import { theme } from "@ui/styles/theme";
 import React from "react";
 import { FlatList, RefreshControl, View } from "react-native";
 import { EmptyState } from "./components/EmptyState";
+import { Fab } from "./components/Fab";
 import { FullScreenLoader } from "./components/FullScreenLoader";
 import { Header } from "./components/Header";
 import { itemSeparaorComponent } from "./components/ItemSeparatorComponent";
@@ -60,6 +61,10 @@ export function Home() {
           )}
         />
       </HomeProvider>
+
+     {meals.length > 0 && (
+       <Fab />
+     )}
     </View>
   )
 }
