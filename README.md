@@ -4,6 +4,27 @@
 
 Aplicação serverless full-stack que permite registrar refeições através de fotos ou áudio, recebendo análises nutricionais automáticas por GPT-4. Calcula metas personalizadas e acompanha o consumo diário de calorias e macronutrientes.
 
+## Screenshots
+
+<div align="center">
+  <img src="preview_images/greetings.png" alt="Tela de boas-vindas" width="200"/>
+  <img src="preview_images/login.png" alt="Login" width="200"/>
+  <img src="preview_images/onboarding.png" alt="Onboarding" width="200"/>
+  <img src="preview_images/onboarding_final.png" alt="Onboarding final" width="200"/>
+</div>
+
+<div align="center">
+  <img src="preview_images/Home.png" alt="Home - Feed de refeições" width="200"/>
+  <img src="preview_images/Gravando_audio_1.png" alt="Gravando áudio" width="200"/>
+  <img src="preview_images/gravando_audio_2.png" alt="Gravando áudio 2" width="200"/>
+</div>
+
+<div align="center">
+  <img src="preview_images/tirando_foto.png" alt="Tirando foto" width="200"/>
+  <img src="preview_images/load_enviando_meal.png" alt="Processando refeição" width="200"/>
+  <img src="preview_images/meal_detalhes.png" alt="Detalhes da refeição" width="200"/>
+</div>
+
 ## Funcionalidades
 
 - Registro de refeições por **foto** (GPT-4 Vision) ou **áudio** (transcrição + análise)
