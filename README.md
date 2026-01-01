@@ -6,24 +6,24 @@ Aplicação serverless full-stack que permite registrar refeições através de 
 
 ## Screenshots
 
-<div align="center">
-  <img src="preview_images/greetings.png" alt="Tela de boas-vindas" width="200"/>
-  <img src="preview_images/login.png" alt="Login" width="200"/>
-  <img src="preview_images/onboarding.png" alt="Onboarding" width="200"/>
-  <img src="preview_images/onboarding_final.png" alt="Onboarding final" width="200"/>
-</div>
+<p align="center">
+  <img src="preview_images/greetings.png" alt="Tela de boas-vindas" width="24%" />
+  <img src="preview_images/login.png" alt="Login" width="24%" />
+  <img src="preview_images/onboarding.png" alt="Onboarding" width="24%" />
+  <img src="preview_images/onboarding_final.png" alt="Onboarding final" width="24%" />
+</p>
 
-<div align="center">
-  <img src="preview_images/Home.png" alt="Home - Feed de refeições" width="200"/>
-  <img src="preview_images/Gravando_audio_1.png" alt="Gravando áudio" width="200"/>
-  <img src="preview_images/gravando_audio_2.png" alt="Gravando áudio 2" width="200"/>
-</div>
+<p align="center">
+  <img src="preview_images/Home.png" alt="Home - Feed de refeições" width="24%" />
+  <img src="preview_images/Gravando_audio_1.png" alt="Gravando áudio" width="24%" />
+  <img src="preview_images/gravando_audio_2.png" alt="Gravando áudio 2" width="24%" />
+  <img src="preview_images/tirando_foto.png" alt="Tirando foto" width="24%" />
+</p>
 
-<div align="center">
-  <img src="preview_images/tirando_foto.png" alt="Tirando foto" width="200"/>
-  <img src="preview_images/load_enviando_meal.png" alt="Processando refeição" width="200"/>
-  <img src="preview_images/meal_detalhes.png" alt="Detalhes da refeição" width="200"/>
-</div>
+<p align="center">
+  <img src="preview_images/load_enviando_meal.png" alt="Processando refeição" width="32%" />
+  <img src="preview_images/meal_detalhes.png" alt="Detalhes da refeição" width="32%" />
+</p>
 
 ## Funcionalidades
 
